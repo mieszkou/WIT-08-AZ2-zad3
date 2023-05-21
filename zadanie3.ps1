@@ -166,7 +166,7 @@ do
     } '2' {
         # "Lista dostępnych regionów",
         try {
-             Get-AzLocation  | Select-Object Location, DisplayName |  Format-Table
+             Get-AzLocation  | Where-Object GeographyGroup -eq "Europe" | Select-Object Location, DisplayName |  Format-Table
     } catch { 
         Show-Except -obj $_
     }
