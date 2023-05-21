@@ -46,7 +46,7 @@ function Show-Except {
         )
     
     Write-Host
-    Write-Host "⚠️  - Wystąpił błąd"
+    Write-Host "Wystąpił błąd"
     Write-Host "=================================================="
     Write-Host "$obj"
     Write-Host "=================================================="
