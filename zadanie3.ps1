@@ -1,4 +1,4 @@
-﻿# Urbanowski Mieszko nr alb 3421
+# Urbanowski Mieszko nr alb 3421
 
 $reqModules = @(
     "Az.Accounts",
@@ -21,8 +21,9 @@ if($errorFlag) {
     Exit
 }
 
-
 Import-Module Az.Accounts
+Import-Module Az.Storage
+Import-Module Az.Resources
 Import-Module AzureAD
 
 try {
@@ -36,18 +37,6 @@ try {
     Show-Except -obj $_
     exit
 }
-
-$menu = @(
-    "Informacje o mojej subskrypcji",
-    "Lista dostępnych kont storage",
-    "Lista dostępnych regionów (Europa)",
-    "Stworzenie nowego konta storage (Europa)",
-    "Stworzenie File Share w istniejącym storage account z wskazaniem na tear i qouta",
-    "Lista grup dostępnych w azure AD",
-    "Dopisanie wybranej grupie uprawnień 'Storage Account Contributor' do wybranej grupy zasobów",
-    "Kasowanie wskazanego storage account"
-)
-
 
 function Show-Except {
     param (
@@ -141,6 +130,18 @@ function Show-Menu {
 # Główna pętla programu
 #
 #############################################
+
+$menu = @(
+    "Informacje o mojej subskrypcji",
+    "Lista dostępnych kont storage",
+    "Lista dostępnych regionów (Europa)",
+    "Stworzenie nowego konta storage (Europa)",
+    "Stworzenie File Share w istniejącym storage account z wskazaniem na tear i qouta",
+    "Lista grup dostępnych w azure AD",
+    "Dopisanie wybranej grupie uprawnień 'Storage Account Contributor' do wybranej grupy zasobów",
+    "Kasowanie wskazanego storage account"
+)
+
 do
  {
     
