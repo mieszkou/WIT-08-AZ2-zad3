@@ -26,18 +26,6 @@ Import-Module Az.Storage
 Import-Module Az.Resources
 Import-Module AzureAD
 
-try {
-    # https://stackoverflow.com/questions/61313906/is-it-possible-authenticate-both-connect-azaccount-and-connect-azuread-using-mfa
-    Write-Host "Logowanie do konta AZ"
-    Connect-AzAccount | Format-Table
-    Write-Host "Logowanie do konta AD (auto)"
-    $context=Get-AzContext
-    Connect-AzureAD -TenantId $context.Tenant.TenantId -AccountId $context.Account.Id | Format-Table
-} catch { 
-    Show-Except -obj $_
-    exit
-}
-
 function Show-Except {
     param (
         [Parameter(Mandatory = $true)]
@@ -52,6 +40,19 @@ function Show-Except {
     Write-Host "=================================================="
     Write-Host
 }
+
+try {
+    # https://stackoverflow.com/questions/61313906/is-it-possible-authenticate-both-connect-azaccount-and-connect-azuread-using-mfa
+    Write-Host "Logowanie do konta AZ"
+    Connect-AzAccount | Format-Table
+    Write-Host "Logowanie do konta AD (auto)"
+    $context=Get-AzContext
+    Connect-AzureAD -TenantId $context.Tenant.Id -AccountId $context.Account.Id | Format-Table
+} catch { 
+    Show-Except -obj $_
+    exit
+}
+
 
 function Get-User-Choice {
     param (
@@ -92,7 +93,7 @@ function Show-Menu {
         [string[]]$Options
     )
 
-    Clear-Host
+    # Clear-Host
     Write-Host "$MenuName ================"
 
     if($Options.Count -eq 0) {
@@ -146,7 +147,7 @@ do
  {
     
     $choice = Show-Menu -MenuName "Menu programu" -Options $menu
-    Clear-Host
+    # Clear-Host
     :subloop switch ($choice)
     {
     '0' {
